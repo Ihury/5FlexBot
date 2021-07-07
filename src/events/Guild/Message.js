@@ -35,7 +35,7 @@ class Message extends Event {
     if (command) {
       // Verificar se o comando é restrito apenas para o Frango
       // Se for e o membro não for o Frango, o comando não é executado
-      if (command.ownerOnly && message.member.id !== process.env.FRANGO_ID) return
+      if (command.ownerOnly && message.member.id !== process.env.OWNER_ID) return
 
       // Verificar se o comando tem um cooldown definido
       if (command.cooldown) {
