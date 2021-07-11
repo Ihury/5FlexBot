@@ -17,6 +17,11 @@ class Message extends Event {
     // const prefix = /* prefixo pegado da cache da DB para o servidor onde o comando foi executado */ || process.env.BOT_PREFIX
     const prefix = process.env.BOT_PREFIX
 
+    // Temporário. O idioma será pego da db
+    const language = 'pt'
+
+    const t = this.client.translator.translate
+    
     /*
 
       Aqui ficará código que não precise que a mensagem do membro seja um comando
@@ -33,13 +38,13 @@ class Message extends Event {
 
     // Se o comando for encontrado...
     if (command) {
-      // Verificar se o comando é restrito apenas para o Frango
-      // Se for e o membro não for o Frango, o comando não é executado
-      if (command.ownerOnly && message.member.id !== process.env.FRANGO_ID) return
+      // Verificar se o comando é restrito apenas para donos do BOT
+      // Se for e o membro não for um dono do BOT, o comando não é executado
+      if (command.ownersOnly && !this.client.env.OWNERS_IDS.some(id => id === message.member.id)) return
 
       // Verificar se o comando tem um cooldown definido
       if (command.cooldown) {
-        const cooldown = this.client.cooldowns.find(c => c.guildID === message.guildID && c.userID === message.author.id && c.cmd === command.name)
+        const cooldown = this.client.cooldowns.find(c => c.guildID === message.guild.id && c.userID === message.author.id && c.cmd === command.name)
 
         // Verificar se o membro está em cooldown do comando
         if (cooldown) {
@@ -47,24 +52,26 @@ class Message extends Event {
           const expiresIn = cooldown.timestamp + command.cooldown
 
           if (now > expiresIn) {
-            const timeLeft = command.cooldown - (now - expiresIn)/1000
+            const timeLeft = (command.cooldown - (now - expiresIn)/1000).toFixed(1)
 
-            return message.channel
-              .send(new ErrorEmbed(message).setDescription(`Por favor aguarde **${timeLeft.toFixed(1)}** segundos até poder utilizar esse comando novamente.`))
-              .catch(()=>{})
+            const msg = await this.client.sendMessage(message.channel, new ErrorEmbed(message).setDescription(t('events.guild:message.cooldown', language, { timeLeft })))
+            msg.delete({ timeout: timeLeft*1000 })
+            return
           }
         }
+
+        // Se não estiver em cooldown, passa a estar
+        this.client.cooldowns.push({ guildID: message.guild.id, userID: message.author.id, cmd: command.name, timestamp: Date.now() })
+        setTimeout(() => this.client.cooldowns.splice(this.client.cooldowns.findIndex(c => c.guildID === message.guild.id && c.userID === message.author.id), 1), command.cooldown*1000)
       }
 
-      // Verificar se o comando requer alguma permissão e se o membro a tem
+      // Verificar se o comando requer alguma permissão e se o membro as tem a todas
       if (command.permissions.length > 0)
-        if (!message.member.permissions.has(command.permissions))
-          return message.channel
-            .send(new ErrorEmbed(message).setDescription('Você não tem permissão para utilizar esse comando!'))
-            .catch(()=>{})
+        if (!command.permissions.every(p => message.member.permissions.has(p)))
+          return this.client.sendMessage(message.channel, new ErrorEmbed(message).setDescription(t('events.guild.message.cmdNoPerm', language)))
 
       // Finalmente, executa o comando
-      command.run(message, args, prefix)
+      command.run(message, args, prefix, t, language)
     }
   }
 }

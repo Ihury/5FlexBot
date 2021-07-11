@@ -1,1 +1,24 @@
-{}
+{
+  "commands": {
+    "config": {
+      "prefix": {
+        "currentPrefix": "The current prefix is `{prefix}`.\nTo change it, use `{prefix}prefix <new prefix>`, without the **<>**.",
+        "invalidPrefix": "The new prefix cannot have more than 5 characters.",
+        "prefixChanged": "The prefix was successfully changed to `{newPrefix}`."
+      },
+      "language": {
+        "currentLanguage": "The current language is `{currentLanguage}`.\nTo change it, use `{prefix}language <new language>`, without the **<>**.",
+        "invalidLanguage": "Invalid language.\n\nValid languages: {mappedValidLanguages}",
+        "languageChanged": "The language was successfully changed to `{newLanguage}`."
+      }
+    }
+  },
+  "events": {
+    "guild": {
+      "message": {
+        "cooldown": "Please wait **{timeLeft}** seconds before using that command again.",
+        "cmdNoPerm": "You do not have permission to use that command!"
+      }
+    }
+  }
+}

@@ -1,6 +1,7 @@
 const { Client, MessageEmbed } = require('discord.js')
 const { readdirSync } = require('fs')
 const Translator = require('./utils/Translator')
+const EnvParser = new (require('./utils/EnvParser'))()
 
 class FiveFlexPro extends Client {
   constructor (options) {
@@ -11,6 +12,10 @@ class FiveFlexPro extends Client {
 
     this.logger = require('./utils/Logger.js')
     this.translator = new Translator(this)
+    this.env = EnvParser.parseEnv()
+
+    // Discord Utilities
+    this.sendMessage = (channel, content, options) => channel.send(content, options).catch(()=>{})
 
     this.cachedDB = {} // Armazenamento do banco de dados em cache
 

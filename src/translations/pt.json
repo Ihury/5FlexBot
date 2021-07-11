@@ -1,1 +1,24 @@
-{}
+{
+  "commands": {
+    "config": {
+      "prefix": {
+        "currentPrefix": "O prefixo atual é `{prefix}`.\nPara alterá-lo, utilize `{prefix}prefixo <novo prefix>`, sem as **<>**.",
+        "invalidPrefix": "O novo prefixo não pode ter mais de 5 caracteres.",
+        "prefixChanged": "O prefixo foi alterado para `{newPrefix}` com sucesso."
+      },
+      "language": {
+        "currentLanguage": "O idoma atual é `{currentLanguage}`.\nPara alterá-lo, utilize `{prefix}idioma <novo idioma>`, sem as **<>**.",
+        "invalidLanguage": "Idioma inválido.\n\nIdiomas válidos: {mappedValidLanguages}",
+        "languageChanged": "O idioma foi alterado para `{newLanguage}` com sucesso."
+      }
+    }
+  },
+  "events": {
+    "guild": {
+      "message": {
+        "cooldown": "Por favor aguarde **{timeLeft}** até utilizar esse comando novamente.",
+        "cmdNoPerm": "Você não tem permissão para utilizar esse comando!"
+      }
+    }
+  }
+}

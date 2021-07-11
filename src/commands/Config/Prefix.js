@@ -10,28 +10,22 @@ class PrefixCommand extends Command {
     })
   }
 
-  run = (message, args, prefix) => {
+  run = (message, args, prefix, t, language) => {
     // Se o membro não providenciar nenhum argumento, mostra o prefixo atual...
     if (!args.length)
-      return message.channel
-        .send(new Embed(message).setDescription(`O prefixo atual é \`${prefix}\`.\nPara alterá-lo, utilize \`${prefix}prefixo <novo prefix>\`, sem as **<>**.`))
-        .catch(()=>{})
+      return this.client.sendMessage(message.channel, new Embed(message).setDescription(t('commands.config:prefix.currentPrefix', language, { prefix, args })))
 
     // ...senão pega no novo prefixo indicado e verifica se é válido para ser definido
     const newPrefix = args.join('')
 
     if (newPrefix.length > 5)
-      return message.channel
-        .send(new ErrorEmbed(message).setDescription('O prefixo não pode ter mais de 5 caracteres.'))
-        .catch(()=>{})
+      return this.client.sendMessage(message.channel, new ErrorEmbed(message).setDescription(t('commands.config:prefix.invalidPrefix', language)))
     
     /*
       Nessa linha o novo prefixo será setado no banco de dados e na cache do bot
     */
 
-    message.channel
-      .send(new Embed(message).setDescription(`O prefixo foi alterado para \`${newPrefix}\` com sucesso.`))
-      .catch(()=>{})
+    this.client.sendMessage(message.channel, new Embed(message).setDescription(t('commands.config:prefix.prefixChanged', language, { newPrefix })))
   }
 }
 
