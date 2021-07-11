@@ -4,7 +4,7 @@ class Command {
     this.name = options.name
     this.aliases = options.aliases || []
     this.cooldown = options.cooldown || 3
-    this.ownerOnly = options.ownerOnly || false
+    this.ownersOnly = options.ownersOnly || false
     this.permissions = options.permissions || []
   }
 }
