@@ -10,6 +10,22 @@ class FiveFlexPro extends Client {
     this.commands = []
     this.cooldowns = [] // { guildID: string, userID: string, cmd: string, timestamp: number }[]
 
+    this.database = {
+      guilds: require('./database/models/Guild'),
+      users: require('./database/models/User'),
+      botStatuses: require('./database/models/BotStatus'),
+      factions: require('./database/models/Faction'),
+      giveaways: require('./database/models/Giveaway'),
+      guildMySQLConfigs: require('./database/models/GuildMySQLConfig'),
+      tickets: require('./database/models/Ticket'),
+      vips: require('./database/models/Vip'),
+      staffGroups: require('./database/models/StaffGroup'),
+      userCars: require('./database/models/UserCar'),
+      whitelists: require('./database/models/Whitelist'),
+      whitelistQuestions: require('./database/models/WhitelistQuestion')
+    }
+    this.databaseCache = {} // Armazenamento do banco de dados em cache (PESADO)
+
     this.logger = require('./utils/Logger.js')
     this.translator = new Translator(this)
     this.env = EnvParser.parseEnv()
@@ -17,10 +33,31 @@ class FiveFlexPro extends Client {
     // Discord Utilities
     this.sendMessage = (channel, content, options) => channel.send(content, options).catch(()=>{})
 
-    this.cachedDB = {} // Armazenamento do banco de dados em cache
-
+    this.connectToDatabase()
     this.loadCommands()
     this.loadEvents()
+  }
+
+
+
+
+  static logger = () => {
+    return this.logger
+  }
+
+
+
+
+  async connectToDatabase () {
+    const Connection = require('./database/Connection')
+
+    try {
+      await Connection.authenticate();
+      this.logger.log({ color: 'green', msg: '🎲' }, { color: 'green', msg: ' Conexão com a DB estabelecida com sucesso' })
+    } catch (e) {
+      this.logger.log({ color: 'red', msg: '🎲' }, { color: 'red', msg: 'Erro ao estabelecer conexão com a DB:' })
+      this.logger.log({ color: 'red', msg: '🎲' }, { color: 'red', msg: ` ↳ ${e.message}` })
+    }
   }
 
 
@@ -47,7 +84,7 @@ class FiveFlexPro extends Client {
       const OK = (total !== failed && !!commands.length)
       const color = OK ? 'green' : 'yellow'
 
-      this.logger.log({ color, msg: OK ? '🟢' : '🟡' }, { color, msg: OK ? `${total-failed}/${total} Comando(s) de ${category} carregados` : `Nenhum comando de ${category} por carregar` })
+      this.logger.log({ color, msg: OK ? '🟢' : '🟡' }, { color, msg: OK ? `${total-failed}/${total} Comando(s) de ${category} carregados` : `Nenhum comando de ${category} carregado` })
     }
   }
 
@@ -77,7 +114,7 @@ class FiveFlexPro extends Client {
       const OK = (total !== failed && !!events.length)
       const color = OK ? 'green' : 'yellow'
 
-      this.logger.log({ color, msg: OK ? '🟢' : '🟡' }, { color, msg: OK ? `${total-failed}/${total} Evento(s) de ${category} carregados` : `Nenhum evento de ${category} por carregar` })
+      this.logger.log({ color, msg: OK ? '🟢' : '🟡' }, { color, msg: OK ? `${total-failed}/${total} Evento(s) de ${category} carregados` : `Nenhum evento de ${category} carregado` })
     }
   }
 }
