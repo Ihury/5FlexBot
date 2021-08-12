@@ -50,7 +50,6 @@ class FiveFlexPro extends Client {
     this.connectToDatabase()
     this.loadDatabaseModels()
     this.applyDatabaseModelsHooks()
-    this.loadDatabaseDataIntoCache()
     this.loadCommands()
     this.loadEvents()
   }

@@ -8,7 +8,22 @@ module.exports = class extends Command {
       name: 'idioma',
       description: 'Mostra ou define o idioma das respostas do BOT.',
       options: [
-        { name: 'novo_idioma', type: 'STRING', description: 'Novo idioma a definir.', required: false }
+        { 
+          name: 'novo_idioma', 
+          type: 'STRING', 
+          description: 'Novo idioma a definir.', 
+          required: false,
+          choices: [
+            {
+              name: 'pt',
+              value: 'pt'
+            },
+            {
+              name: 'en',
+              value: 'en'
+            }
+          ]
+        }
       ],
     })
   }

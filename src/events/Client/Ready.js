@@ -10,6 +10,7 @@ module.exports = class extends Event {
   run = async() => {
     this.client.logger.log({ color: 'green', msg: '🤖' }, { color: 'green', msg: ` ${this.client.user.tag} conectado em ${this.client.guilds.cache.size} servidor(es)` })
 
+    await this.client.loadDatabaseDataIntoCache()
     this.client.registerCommands()
     this.loadUncaughtGuilds()
   }
