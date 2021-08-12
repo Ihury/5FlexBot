@@ -1,5 +1,5 @@
 const { Command } = require('../../Structures')
-const { Embed, ErrorEmbed } = require('../../utils/Embeds')
+const { Embed, ErrorEmbed, InfoEmbed } = require('../../utils/Embeds')
 
 module.exports = class extends Command {
   constructor (client) {
@@ -11,7 +11,8 @@ module.exports = class extends Command {
 
   run = (interaction, t, language) => {
     interaction.reply({
-      content: t('commands.general:ping', language, { ping: this.client.ws.ping })
+      embeds: [ new InfoEmbed().setDescription(t('commands.general:ping', language, { ping: this.client.ws.ping })) ],
+      ephemeral: true
     })
   }
 }

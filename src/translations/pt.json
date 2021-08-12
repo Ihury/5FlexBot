@@ -1,18 +1,27 @@
 {
   "commands": {
     "general": {
-      "ping": "📡 | O ping do BOT está a **{ping}**ms."
+      "ping": "📡 O ping do BOT está a **{ping}**ms."
     },
     "config": {
-      "prefix": {
-        "currentPrefix": "O prefixo atual é `{prefix}`.\nPara alterá-lo, utilize `{prefix}prefixo <novo prefix>`, sem as **<>**.",
-        "invalidPrefix": "O novo prefixo não pode ter mais de 5 caracteres.",
-        "prefixChanged": "O prefixo foi alterado para `{newPrefix}` com sucesso."
-      },
       "language": {
-        "currentLanguage": "O idoma atual é `{currentLanguage}`.",
-        "invalidLanguage": "Idioma inválido.\n\nIdiomas válidos: {mappedValidLanguages}",
-        "languageChanged": "O idioma foi alterado para `{updatedLanguage}` com sucesso."
+        "currentLanguage": "🌐 O idoma atual é `{currentLanguage}`.",
+        "languageChanged": "✅ O idioma foi alterado para `{updatedLanguage}` com sucesso."
+      },
+      "setup": {
+        "notCategory": "❌ Você deve providenciar uma categoria.",
+        "creatingChannels": "⏳ Criando e configurando todos os canais, por favor aguarde.",
+        "channelsCreated": "✅ Canais criados com sucesso na categoria `{categoryName}`!",
+        "channels": {
+          "setupCategory": "🔧Configuração",
+          "timeRecord": "📑Bater-Ponto",
+          "captcha": "✅Captcha",
+          "counter": "🎰Contador",
+          "inAndOuts": "🔁Entradas-Saídas",
+          "logs": "📜Logs",
+          "giveaways": "🎁Sorteios",
+          "tickets": "🎫Tickets"
+        }
       }
     }
   },

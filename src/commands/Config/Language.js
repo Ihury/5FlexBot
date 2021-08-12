@@ -1,6 +1,7 @@
 const { Command } = require('../../Structures')
-const { Embed, ErrorEmbed } = require('../../utils/Embeds')
+const { Embed, ErrorEmbed, SuccessEmbed, InfoEmbed } = require('../../utils/Embeds')
 const { readdirSync } = require('fs')
+const { MessageEmbed } = require('discord.js')
 
 module.exports = class extends Command {
   constructor (client) {
@@ -28,21 +29,22 @@ module.exports = class extends Command {
 
     // Se o membro não providenciar nenhum idioma, mostra o idioma atual...
     if (!inputLanguage)
-      return interaction.reply({ embeds: [
-        new Embed(interaction)
-          .setDescription(t('commands.config:language.currentLanguage', language, { currentLanguage: language.toUpperCase() }))
-      ] })
+      return interaction.reply({
+        embeds: [ new InfoEmbed().setDescription(t('commands.config:language.currentLanguage', language, { currentLanguage: language.toUpperCase() })) ],
+        ephemeral: true
+      })
 
+    // Atualiza o idioma no banco de dados
     this.client.database.guilds.update({ language: inputLanguage }, {
       where: {
         id: interaction.guildId
       }
     })
     .then(() => {
-      interaction.reply({ embeds: [
-        new Embed(interaction)
-          .setDescription(t('commands.config:language.languageChanged', inputLanguage, { updatedLanguage: inputLanguage.toUpperCase() }))
-      ] })
+      interaction.reply({
+        embeds: [ new SuccessEmbed().setDescription(t('commands.config:language.languageChanged', inputLanguage, { updatedLanguage: inputLanguage.toUpperCase() })) ],
+        ephemeral: true
+      })
     })
   }
 }

@@ -93,7 +93,7 @@ module.exports = {
         defaultValue: false
       },
       olx_channel: Sequelize.STRING(20),
-      beat_time_status: {
+      beat_time_status: { // timeRecord
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
