@@ -35,7 +35,7 @@ module.exports = {
         allowNull: false
       },
       database_type: {
-        type: Sequelize.STRING(3),
+        type: Sequelize.STRING(4),
         allowNull: false
       },
       

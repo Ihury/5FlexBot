@@ -9,7 +9,7 @@ class GuildMySqlConfig extends Model {
       user: DataTypes.STRING(50),
       password: DataTypes.STRING(50),
       database_name: DataTypes.STRING(45),
-      database_type: DataTypes.STRING(3)
+      database_type: DataTypes.STRING(4)
       // não precisamos passar os campos "updated_at" nem "created_at" quando ele tem "timestamps: true" na config da DB
     }, { sequelize: connection })
   }
