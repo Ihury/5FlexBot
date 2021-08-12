@@ -1,5 +1,8 @@
 {
   "commands": {
+    "general": {
+      "ping": "📡 | The BOT ping is **{ping}**ms."
+    },
     "config": {
       "prefix": {
         "currentPrefix": "The current prefix is `{prefix}`.\nTo change it, use `{prefix}prefix <new prefix>`, without the **<>**.",
@@ -7,9 +10,9 @@
         "prefixChanged": "The prefix was successfully changed to `{newPrefix}`."
       },
       "language": {
-        "currentLanguage": "The current language is `{currentLanguage}`.\nTo change it, use `{prefix}language <new language>`, without the **<>**.",
+        "currentLanguage": "The current language is `{currentLanguage}`.",
         "invalidLanguage": "Invalid language.\n\nValid languages: {mappedValidLanguages}",
-        "languageChanged": "The language was successfully changed to `{newLanguage}`."
+        "languageChanged": "The language was successfully changed to `{updatedLanguage}`."
       }
     }
   },

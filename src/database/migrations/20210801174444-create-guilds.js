@@ -12,6 +12,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: false
       },
+      language: {
+        type: Sequelize.STRING(2),
+        defaultValue: 'pt'
+      },
       premium_end_timestamp: Sequelize.BIGINT,
       server_ip: Sequelize.STRING(15),
       server_port: Sequelize.STRING(4),

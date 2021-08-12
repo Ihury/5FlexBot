@@ -1,4 +1,4 @@
-class Logger {
+module.exports = class {
   static colors() {
     return {
       // Reset
@@ -55,5 +55,3 @@ class Logger {
     )
   }
 }
-
-module.exports = Logger

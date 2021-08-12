@@ -14,7 +14,7 @@ class Faction extends Model {
   }
 
   static associate = (models) => {
-    this.belongsTo(models.Guild, { foreignKey: 'guild_id', as: 'guild' })
+    this.belongsTo(models.Guild, { foreignKey: 'id', as: 'guild' })
   }
 }
 

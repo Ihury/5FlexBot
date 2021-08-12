@@ -5,6 +5,7 @@ class Guild extends Model {
     super.init({
       premium: DataTypes.BOOLEAN,
       premium_end_timestamp: DataTypes.BIGINT,
+      language: DataTypes.STRING(2),
       server_ip: DataTypes.STRING(15),
       server_port: DataTypes.STRING(4),
       server_representative_ip: DataTypes.STRING(50),
@@ -89,14 +90,14 @@ class Guild extends Model {
   }
 
   static associate(models) {
-    this.hasOne(models.GuildMySQLConfig, { foreignKey: 'guild_id', as: 'guildMySQLConfig' })
-    this.hasOne(models.Whitelist, { foreignKey: 'guild_id', as: 'guildWhitelist' })
+    this.hasOne(models.GuildMySqlConfig, { foreignKey: 'id', as: 'guildMySqlConfigs' })
+    this.hasOne(models.Whitelist, { foreignKey: 'id', as: 'guildWhitelist' })
     this.hasOne(models.StaffGroup, { foreignKey: 'guild_id', as: 'guildStaffGroup' })
 
     this.hasMany(models.Ticket, { foreignKey: 'guild_id', as: 'guildTickets' })
     this.hasMany(models.User, { foreignKey: 'guild_id', as: 'guildUsers' })
     this.hasMany(models.WhitelistQuestion, { foreignKey: 'guild_id', as: 'guildWhitelistQuestions' })
-    this.hasMany(models.UserCar, { foreignKey: 'guild_id', as: 'guildUserCars' })
+    this.hasMany(models.UsersCar, { foreignKey: 'guild_id', as: 'guildUserCars' })
     this.hasMany(models.Faction, { foreignKey: 'guild_id', as: 'guildFactions' })
     this.hasMany(models.Giveaway, { foreignKey: 'guild_id', as: 'guildGiveaways' })
     this.hasMany(models.Vip, { foreignKey: 'guild_id', as: 'guildVips' })

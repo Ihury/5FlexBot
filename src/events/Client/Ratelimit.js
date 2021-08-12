@@ -1,6 +1,6 @@
 const { Event } = require('../../Structures')
 
-class Ratelimit extends Event {
+module.exports = class extends Event {
   constructor (client) {
     super(client, {
       name: 'ratelimit'
@@ -12,5 +12,3 @@ class Ratelimit extends Event {
     process.exit(0)
   }
 }
-
-module.exports = Ratelimit

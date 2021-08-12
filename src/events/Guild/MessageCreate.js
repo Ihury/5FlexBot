@@ -1,15 +1,41 @@
+/*
+
+
+
+
+
+
+
+
+
+
+
+ESTE EVENTO NÃO SERÁ MAIS UTILIZADO, EM PRINCÍPIO, A NÃO SER PARA ALGUM SISTEMA DE LEVELS E XP, POR EXEMPLO
+
+
+
+
+
+
+
+
+
+
+
+*/
+
 const { MessageEmbed } = require('discord.js')
 const { Event } = require('../../Structures')
 const { ErrorEmbed } = require('../../utils/Embeds')
 
-class Message extends Event {
+module.exports = class extends Event {
   constructor (client) {
     super(client, {
-      name: 'message'
+      name: 'messageCreate'
     })
   }
 
-  run = async(message) => {
+  run = async (message) => {
     // Se o autor da mensagem for um bot ou o canal do comando não for de texto, ignora
     if (message.author.bot || message.channel.type !== 'text') return
 
@@ -75,5 +101,3 @@ class Message extends Event {
     }
   }
 }
-
-module.exports = Message

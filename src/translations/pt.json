@@ -1,5 +1,8 @@
 {
   "commands": {
+    "general": {
+      "ping": "📡 | O ping do BOT está a **{ping}**ms."
+    },
     "config": {
       "prefix": {
         "currentPrefix": "O prefixo atual é `{prefix}`.\nPara alterá-lo, utilize `{prefix}prefixo <novo prefix>`, sem as **<>**.",
@@ -7,9 +10,9 @@
         "prefixChanged": "O prefixo foi alterado para `{newPrefix}` com sucesso."
       },
       "language": {
-        "currentLanguage": "O idoma atual é `{currentLanguage}`.\nPara alterá-lo, utilize `{prefix}idioma <novo idioma>`, sem as **<>**.",
+        "currentLanguage": "O idoma atual é `{currentLanguage}`.",
         "invalidLanguage": "Idioma inválido.\n\nIdiomas válidos: {mappedValidLanguages}",
-        "languageChanged": "O idioma foi alterado para `{newLanguage}` com sucesso."
+        "languageChanged": "O idioma foi alterado para `{updatedLanguage}` com sucesso."
       }
     }
   },
