@@ -1,19 +1,19 @@
 const { MessageEmbed } = require('discord.js')
 
 class Embed extends MessageEmbed {
-  constructor(message) {
+  constructor(interaction) {
     super()
 
     this
-      .setAuthor(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
-      .setFooter(message.guild.name, message.guild.iconURL({ dynamic: true }))
+      .setAuthor(interaction.member.displayName, interaction.user.displayAvatarURL({ dynamic: true }))
+      .setFooter(interaction.guild.name, interaction.guild.iconURL({ dynamic: true }))
       .setTimestamp()
   }
 }
 
 class ErrorEmbed extends Embed {
-  constructor(message) {
-    super(message)
+  constructor(interaction) {
+    super(interaction)
 
     this.setColor('RED')
   }

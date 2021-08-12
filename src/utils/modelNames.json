@@ -1,0 +1,14 @@
+{
+  "BotStatus": "botStatuses",
+  "Faction": "factions",
+  "Giveaway": "giveaways",
+  "Guild": "guilds",
+  "GuildMySqlConfig": "guildMySqlConfigs",
+  "StaffGroup": "staffGroups",
+  "Ticket": "tickets",
+  "User": "users",
+  "UsersCar": "usersCars",
+  "Vip": "vips",
+  "Whitelist": "whitelists",
+  "WhitelistQuestion": "whitelistQuestions"
+}

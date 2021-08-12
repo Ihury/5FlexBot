@@ -3,7 +3,7 @@ const { readdirSync, readFileSync } = require('fs')
 // Para mais informação, acessar:
 // https://github.com/5antos/JS-Randomness/tree/master/Translation
 
-class Translator {
+module.exports = class {
   constructor(client, languagesFolderPath='./src/translations') {
     this.client = client
     this.languagesFolderPath = languagesFolderPath
@@ -46,5 +46,3 @@ class Translator {
     return string.replace(new RegExp(Object.keys(placeholders).map(k => `${delimiters[0]}${k}${delimiters[1]}`).join('|'), 'g'), match => placeholders[match.replace(new RegExp(delimiters.join('|'), 'g'), '')])
   }
 }
-
-module.exports = Translator
