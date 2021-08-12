@@ -13,28 +13,16 @@ module.exports = class extends Command {
           type: 'STRING', 
           description: 'Novo idioma a definir.', 
           required: false,
-          choices: [
-            {
-              name: 'pt',
-              value: 'pt'
-            },
-            {
-              name: 'en',
-              value: 'en'
-            }
-          ]
+          choices: readdirSync('./src/translations').map(t => {
+            const [language] = t.split('.')
+            return { name: language, value: language } 
+          })
         }
       ],
     })
   }
 
   run = (interaction, t, language) => {
-    // Objeto para "formatar" o idioma para texto
-    const validLanguagesObject = {
-      'pt': 'português',
-      'en': 'english'
-    }
-
     // Pegar no idioma que o usuário introduziu, se introduziu algum
     const inputLanguage = interaction.options.getString('novo_idioma')
 
@@ -42,17 +30,7 @@ module.exports = class extends Command {
     if (!inputLanguage)
       return interaction.reply({ embeds: [
         new Embed(interaction)
-          .setDescription(t('commands.config:language.currentLanguage', language, { currentLanguage: validLanguagesObject[language] }))
-      ] })
-
-    // ...senão pega no novo idioma indicado e verifica se é válido para ser definido
-    const validLanguages = readdirSync('./src/translations').map(t => t.split('.')[0])
-
-    // Verificar se o membro providenciou um idioma válido
-    if (!validLanguages.includes(inputLanguage))
-      return interaction.reply({ embeds: [
-        new ErrorEmbed(interaction)
-          .setDescription(t('commands.config:language.invalidLanguage', language, { mappedValidLanguages: validLanguages.map(l => `\`${l}\``).join(', ') }))
+          .setDescription(t('commands.config:language.currentLanguage', language, { currentLanguage: language.toUpperCase() }))
       ] })
 
     this.client.database.guilds.update({ language: inputLanguage }, {
@@ -63,7 +41,7 @@ module.exports = class extends Command {
     .then(() => {
       interaction.reply({ embeds: [
         new Embed(interaction)
-          .setDescription(t('commands.config:language.languageChanged', inputLanguage, { updatedLanguage: validLanguagesObject[inputLanguage] }))
+          .setDescription(t('commands.config:language.languageChanged', inputLanguage, { updatedLanguage: inputLanguage.toUpperCase() }))
       ] })
     })
   }
