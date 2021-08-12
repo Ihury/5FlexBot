@@ -2,8 +2,8 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('guild_mysql_configs', {
-      guild_id: {
+    await queryInterface.createTable('guild_my_sql_configs', {
+      id: { // guild_id
         type: Sequelize.STRING(20),
         primaryKey: true,
         allowNull: false,
@@ -52,6 +52,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('guild_mysql_configs')
+    await queryInterface.dropTable('guild_my_sql_configs')
   }
 };

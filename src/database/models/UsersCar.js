@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class UserCar extends Model {
+class UsersCar extends Model {
   static init(connection) {
     super.init({
       // owner_id: DataTypes.STRING(20),
@@ -17,4 +17,4 @@ class UserCar extends Model {
   }
 }
 
-module.exports = UserCar
+module.exports = UsersCar

@@ -1,6 +1,6 @@
 const { readFileSync } = require('fs')
 
-class EnvParser {
+module.exports = class {
   constructor(envPath='.env') {
     this.envPath = envPath
   }
@@ -23,5 +23,3 @@ class EnvParser {
     )
   }
 }
-
-module.exports = EnvParser

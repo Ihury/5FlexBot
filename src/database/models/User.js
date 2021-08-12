@@ -17,7 +17,7 @@ class User extends Model {
 
   static associate(models) {
     this.belongsTo(models.Guild, { foreignKey: 'guild_id', as: 'guildID' })
-    this.belongsToMany(models.UserCar, { foreignKey: 'owner_id', through: 'users_cars', as: 'cars' })
+    this.belongsToMany(models.UsersCar, { foreignKey: 'owner_id', through: 'users_cars', as: 'cars' })
   }
 }
 

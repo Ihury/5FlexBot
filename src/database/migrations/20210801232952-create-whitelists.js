@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('whitelists', {
-      guild_id: {
+      id: { // guild_id
         type: Sequelize.STRING(20),
         allowNull: false,
         primaryKey: true,

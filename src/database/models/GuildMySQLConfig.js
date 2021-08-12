@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize')
 
-class GuildMySQLConfig extends Model {
+class GuildMySqlConfig extends Model {
   static init(connection) {
     super.init({
       // guild_id: DataTypes.STRING(20),
@@ -15,8 +15,8 @@ class GuildMySQLConfig extends Model {
   }
 
   static associate(models) {
-    this.belongsTo(models.Guild, { foreignKey: 'guild_id', as: 'guildID' })
+    this.belongsTo(models.Guild, { foreignKey: 'id', as: 'guildID' })
   }
 }
 
-module.exports = GuildMySQLConfig
+module.exports = GuildMySqlConfig
