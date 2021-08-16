@@ -8,7 +8,8 @@ module.exports = class extends Event {
   }
 
   run = async (interaction) => {
-    const language = (await this.client.database.guilds.findByPk(interaction.guildId))?.language
+    interaction.guildDB = await this.client.database.guilds.findByPk(interaction.guildId)
+    const language = interaction.guildDB?.language
 
     // Se o usuário executar um comando (slash command)
     if (interaction.isCommand())
